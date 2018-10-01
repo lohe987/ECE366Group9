@@ -4,8 +4,10 @@ ADD - 0001 xxx
     Ra = Ra + Rxxx
 MOV - 0010 xxx
     Ra = Rxxx
+---------------Useless-------------------
 CMP - 0011 xxx
     iff Ra = Rxxx then Rf = 1 else Rf = 0
+-----------------------------------------
 AND - 0100 xxx
     Ra = Ra & Rxxx
 SLL - 0101 xxx
@@ -19,7 +21,7 @@ ADDI- 1000 xxx
 SUB - 1001 xxx
     Ra = Ra - Rxxx
 BCMP- 1010000
-    PC = Ra iff Rf = 1 else PC++
+    PC = Ra iff Ra == Rxxx else PC++
 B   - 1011001
     PC = Ra
 SRL - 1100 xxx
