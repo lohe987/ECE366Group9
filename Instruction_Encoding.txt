@@ -1,0 +1,28 @@
+SAR - 0000 xxx
+    Ra = Rxxx
+ADD - 0001 xxx
+    Ra = Ra + Rxxx
+MOV - 0010 xxx
+    Ra = Rxxx
+CMP - 0011 xxx
+    iff Ra = Rxxx then Rf = 1 else Rf = 0
+AND - 0100 xxx
+    Ra = Ra & Rxxx
+SLL - 0101 xxx
+    Ra = << Rxxx
+LD  - 0110 xxx
+    Ra = MEM[Rxxx]
+STR - 0111 xxx
+    MEM[Rxxx] = Ra
+ADDI- 1000 xxx
+    Ra = Ra + (xxx)_10
+SUB - 1001 xxx
+    Ra = Ra - Rxxx
+BCMP- 1010000
+    PC = Ra iff Rf = 1 else PC++
+B   - 1011001
+    PC = Ra
+SRL - 1100 xxx
+    Ra >> Rxxx
+MLT - 1101 xxx
+    Ra = Ra * Rxxx
