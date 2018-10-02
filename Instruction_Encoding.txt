@@ -20,7 +20,7 @@ ADDI- 1000 xxx
     Ra = Ra + (xxx)_10
 SUB - 1001 xxx
     Ra = Ra - Rxxx
-BCMP- 1010000
+BCMP- 1010 xxx
     PC = Ra iff Ra == Rxxx else PC++
 B   - 1011001
     PC = Ra
