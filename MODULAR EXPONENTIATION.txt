@@ -1,0 +1,136 @@
+SAR 1
+ADDI 1 # At this point 1==1
+SAR 2 # Here 2==0(because initial values of all registers is 0.)
+LD 2  # 2=MEM[0] so, 2==P
+SAR 4 
+ADDI 1
+SLL 3
+SLL 1  # At this point 4==16(Number of iterations)
+SAR 5
+ADDI 1
+SAR 3
+LD 5  # Here 3=MEM[1]=Q
+SAR 6
+ADDI 1
+SLL 3
+SLL 3 
+SLL 3
+SLL 3 #At this point 6=0x1000(For bitwise and operation.)
+
+main:
+SAR 7 # store address of out loop (line 131 so address=131)
+MOVI 1 #7=1
+SLL  3 #7=8
+SLL  3 #7=64
+SLL  1 #7=128
+ADDI 3 #7=131
+SAR 5
+MOVI 1
+SAR 4
+BCMP 5
+SAR 5
+MOV 2 #5= Value of base(6)
+AND 6
+SAR 7 # store address of square loop (line 53 so address=53)
+MOVI 1 #7=1
+SLL  3 #7=3
+SLL	 3 #7=24
+SLT  1 #7=48
+ADDI 3 #7=51
+ADDI 2 #7=53 #At this point 7=address of square loop  
+SAR 2 
+BCMP 5
+SAR 7 # store address of square_and_multiply loop (line 80 so address=80)
+MOVI 1 #7=1
+SLL  3 #7=8
+SLL  3 #7=24
+MLT  3 #7=72
+ADDI 3 #7=75
+ADDI 3 #7=77 
+ADDI 3 #7=80#At this point 7=address of square_and_multiply loop 
+B 7
+
+square:
+SAR 1
+MLT 1 #1=(1)^2
+SAR 7 #Store address of MOD loop (line 109 so address=109)
+MOVI 1 #7=1
+SLL  3 #7=8
+SLL  2 #7=32
+MLT  3 #7=96
+ADDI 3 #7=99 
+ADDI 3 #7=102
+ADDI 3 #7=105
+ADDI 3 #7=108
+ADDI 1 #7=109 #At this point 7=address of MOD loop
+SAR 3
+CMPLT 1
+SAR 7 # store address of main loop (line 20 so address=20)
+MOVI 1 #7=1
+SLL  3 #7=8
+SLL  1 #7=16
+ADDI 3 #7=19
+ADDI 1 #7=20 #At this point 7= address of main loop
+SAR 6 
+SRL 1  #Updating 6 for next iteration
+SAR 4 
+ADDI -1 # Updating 6 for next iteration
+B 7
+
+square_and_multiply:
+SAR 1
+MLT 1 #1=(1)^2
+SAR 5
+MOVI 3 # 5==3
+ADDI 3 # 5==6
+SAR 1
+MLT 5 # 1=6(1)^2
+SAR 7 # store address of MOD loop (line 109 so address=109)
+MOVI 1 #7=1
+MLT  3 #7=3
+MLT  3 #7=9
+MLT  3 #7=27
+SLL  2 #7=108
+ADDI 1 #7=109 # At this point 7= Address of MOD loop
+SAR 3
+CMPLT 1
+SAR 7 # store address of main loop (line 20 so address=20)
+MOVI 1 #7=1
+SLL  3 #7=8
+SLL  1 #7=16
+ADDI 3 #7=19
+ADDI 1 #7=20 # At this point 7=address of main loop
+SAR 6
+SRL 1 # Updating 6 for next iteration
+SAR 4
+ADDI -1 # Updating counter for next iteration.
+B 7
+
+MOD:
+SAR 7 # store address of main loop(line 20 so address=20)
+MOVI 1 #7=1
+SLL  3 #7=8
+SLL  1 #7=16
+ADDI 3 #7=19
+ADDI 1 #7=20 # At this point 7=address of main loop
+SAR 1
+CMPLT 3
+SUB 3
+SAR 7 # store address of MOD loop(line 109 so address=109)
+MOVI 1 #7=1
+SLL  3 #7=8
+SLL  3 #7=32
+MLT  3 #7=96
+ADDI 3 #7=99
+ADDI 3 #7=102
+ADDI 3 #7=105
+ADDI 3 #7=108
+ADDI 1 #7=109 # At this point 7= address of MOD loop
+B 7
+
+out:
+SAR 5
+MOVI 1 #7=1
+ADDI 2 #7=3
+SAR 1
+STR 5
