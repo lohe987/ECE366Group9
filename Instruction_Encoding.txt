@@ -4,6 +4,8 @@ ADD - 0001 xxx
     Ra = Ra + Rxxx
 MOV - 0010 xxx
     Ra = Rxxx
+MOVI - 0011 xxx
+    Ra=Ra+(xxx)_10	
 ---------------Useless-------------------
 CMP - 0011 xxx
     iff Ra = Rxxx then Rf = 1 else Rf = 0
@@ -11,7 +13,7 @@ CMP - 0011 xxx
 AND - 0100 xxx
     Ra = Ra & Rxxx
 SLL - 0101 xxx
-    Ra = << Rxxx
+    Ra = << (xxx)_10
 LD  - 0110 xxx
     Ra = MEM[Rxxx]
 STR - 0111 xxx
@@ -21,10 +23,14 @@ ADDI- 1000 xxx
 SUB - 1001 xxx
     Ra = Ra - Rxxx
 BCMP- 1010 xxx
-    PC = Ra iff Ra == Rxxx else PC++
+    PC = R7 iff Ra == Rxxx else PC++ (R7 is dedicated for memory addresses so it will store the address of the desired destination.)
 B   - 1011001
-    PC = Ra
+    PC = R7 (PC will contain the Updated value of R7. R7 will be updated right after BCMP and just before B.)
 SRL - 1100 xxx
-    Ra >> Rxxx
+    Ra >> (xxx)_10
 MLT - 1101 xxx
     Ra = Ra * Rxxx
+
+CMPLT - 1111 xxx
+	Perform Ra-Rxxx (R5=1 if  Ra<Rxxx and R5=0 if Ra>Rxxx)  
+	PC=R7 iff R5==1 else PC++
