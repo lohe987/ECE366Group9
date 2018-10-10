@@ -19,13 +19,13 @@ Details:
 - 0111 STOR -- M[rs] = ra
 - 1000 SUB -- ra = ra - rs
 - 1001 MLT -- ra = ra * rs
-- 1010 BCMP -- PC = (ra == rs ? r7 : PC + 1)
+- 1010 BSLT -- PC = (rp < rs ? rp : PC + 1)
 
 (immediate-parameter instructions: 3)
 - 1011 MOVI -- ra = imm
 - 1100 ADDI -- ra = ra + imm
-- 1101 SPC -- ra = PC + imm
+- 1101 SPC -- rp = PC + imm
 
 (no-parameter instructions: 2)
-- 1110 B -- PC = ra
+- 1110 B -- PC = rp
 - 1111 STOP -- end execution
