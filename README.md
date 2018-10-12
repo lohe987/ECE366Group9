@@ -6,6 +6,7 @@ Details:
 - Sixteen instructions
 - Eight 16-bit registers
 - Implicit destination register assigned with SAR (Set Active Register)
+- Dedicated instruction address storage register Rp (program count register) that is written to with SPC and read from with B/BSLT
 - imm in [-4, 3] for all immediate instructions
 
 - 0000 SAR -- set ra
