@@ -65,7 +65,7 @@ SAR     3
 MOVI    1
 SAR     6
 MOVI    3
-MULT    6
+MLT    6
 ADD     6
 ADD     6
 ADDI    -4
