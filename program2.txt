@@ -61,11 +61,21 @@ LOAD    7
 # I also need to reset r7 to 0x2000
 # and I need to also do r2 = r2 - 1
 # I also need to find someway to get back
+# check the value in memory and update the value
+SAR     0
+MOVI    0
+SAR     7
+LOAD    0
+ADDI    3
+ADDI    1
+SAR     4
+LOAD    7
+# continue with checking logic
 SAR     3
 MOVI    1
 SAR     6
 MOVI    3
-MLT    6
+MLT     6
 ADD     6
 ADD     6
 ADDI    -4
@@ -85,5 +95,47 @@ MOVI    -1
 SAR     7
 MLT     0
 SPC     7
-# if counter is less than 0 then jump to check the maint counter
+# if counter is less than 0 then jump to check the main counter
 BSLT    0
+# continue with checking the bits
+# create a register with 1
+# just make it r0 for now then change it back
+SAR     0
+MOVI    1
+# now get the value of the first bit in target and pattern
+SAR     4
+MOV     1
+AND     0
+# bit 1 of target is now in 4
+SAR     6
+MOV     5
+AND     0
+# bit 1 of pattern is now in 6
+# now get the and of 4 and 6 into 6
+AND     4
+# score in r3 so add r6 to r3 and jump back
+SAR     3
+ADD     6
+# get next bits
+SAR     1
+SLL     0
+SAR     5
+SLL     0
+# jump back 36 + ins from 115 
+SAR     6
+MOVI    3
+MLT     6
+ADD     6
+ADD     6
+ADD     3
+ADD     3
+ADD     3
+ADD     3
+ADD     3
+SAR     0
+MOVI    -1
+SAR     6
+MLT     0
+SAR     0
+SPC     6
+B

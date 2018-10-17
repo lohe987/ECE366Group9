@@ -1,42 +1,51 @@
-SAR 0
+# create a 0 register at r000000000
 MOVI 0
-SAR 6
+# first I need to get to address 819200000110
 ADDI 3
 ADDI 3
 ADDI 3
 ADDI 3
 ADDI 1
-SAR 7
+# r6 = 1310000111
 ADDI 1
 SLL 6
-STOR 0
-SAR 1
+# r7 = 0x2000# save  this address in MEM[0]10111000
+# just to make it easily available# load target into r110000001
 LOAD 7
-SAR 2
+# create a counter at r2 and set to 1910000010
 ADD 6
 ADDI 3
 ADDI 3
-SAR 3
+# r2 = 19# set the branch register to be _ more than PC for branch# check the main counter to see if it is less than 000000011
 MOVI 3
 ADDI 1
 SPC 3
 SAR 0
-BCLT 2
-SAR 3
+BSLT 2
+STOP
+# if branch then it hits this code# create an array pointer which is r4 = r2 * 400000011
 MOVI 2
 SAR 4
 MOV 2
 SLL 3
-SAR 3
+# r4 = r2 << r3 (r4 = maincounter << 2)# now I need to get to the pattern (0x200c)00000011
 MOVI 3
 MLT 3
 ADDI 3
-SAR 7
+# get MEM[0] to get the 0x2000 address location value10000111
 LOAD 0
 ADD 3
-SAR 5
+# r7 = 0x200c00000101
 LOAD 7
-SAR 3
+# r5 = pattern 1# now I want to check the pattern# create a register with 1 in it and 32 in it# need to save the score into a register# I also need to reset r7 to 0x2000# and I need to also do r2 = r2 - 1# I also need to find someway to get back# check the value in memory and update the value00000000
+MOVI 0
+SAR 7
+LOAD 0
+ADDI 3
+ADDI 1
+SAR 4
+LOAD 7
+# continue with checking logic00000011
 MOVI 1
 SAR 6
 MOVI 3
@@ -44,7 +53,7 @@ MLT 6
 ADD 6
 ADD 6
 ADDI -4
-SAR 7
+# r6 = 32# r3 = 1# check the counter# make pc - enough instructions to get back to the other part (31 + amount it take to make 31(9))10000111
 MOVI 3
 MLT 7
 ADD 7
@@ -56,4 +65,36 @@ MOVI -1
 SAR 7
 MLT 0
 SPC 7
-BCLT 0
+# if counter is less than 0 then jump to check the main counter01010000
+# continue with checking the bits# create a register with 1# just make it r0 for now then change it back00000000
+MOVI 1
+# now get the value of the first bit in target and pattern10000100
+MOV 1
+AND 0
+# bit 1 of target is now in 400000110
+MOV 5
+AND 0
+# bit 1 of pattern is now in 6# now get the and of 4 and 6 into 610011100
+# score in r3 so add r6 to r3 and jump back00000011
+ADD 6
+# get next bits10000001
+SLL 0
+SAR 5
+SLL 0
+# jump back 36 + ins from 11500000110
+MOVI 3
+MLT 6
+ADD 6
+ADD 6
+ADD 3
+ADD 3
+ADD 3
+ADD 3
+ADD 3
+SAR 0
+MOVI -1
+SAR 6
+MLT 0
+SAR 0
+SPC 6
+B

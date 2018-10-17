@@ -9,7 +9,7 @@ op_to_ins = {
     '0111': 'STOR',
     '1000': 'SUB',
     '1001': 'MLT',
-    '1010': 'BCLT',
+    '1010': 'BSLT',
     '1011': 'MOVI',
     '1100': 'ADDI',
     '1101': 'SPC',
@@ -22,7 +22,10 @@ fileName = 'machine_encode_2'
 with open(f'./{fileName}.txt', 'r') as binFile, open(f'./{fileName}_to_asm.txt', 'w+') as asmFile:
     for line in binFile:
         instruction = None
-        if line[1:5] not in op_to_ins:
+        if line[0] is '#':
+            asmFile.write(f'{line}')
+            continue
+        elif line[1:5] not in op_to_ins:
             print("Error that op code is not linked to an instruction")
             break
         else:
