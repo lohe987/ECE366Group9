@@ -37,9 +37,9 @@ with open("./program2.txt", "r") as f, open("./machine_encode_2.txt", "w+") as w
         line_list = [i for i in line_list if i != '' and i != ' ']
         op = '' if line_list[0] not in ins_to_op else ins_to_op[line_list[0]] # get the op code
         if ':' in line or line.isspace() or op == '':
-            wf.write(f'{line}')
+            wf.write(f'{line}\n')
         elif op == '1111' or op == '1110':
-            wf.write('11111111\n') if ins_to_op[line_list[0]] == '1111' else wf.write('01110111\n')
+            wf.write(f'11111111\n') if ins_to_op[line_list[0]] == '1111' else wf.write(f'01110111\n')
         else:
             immVal = CleanImmediate(line_list[1])
             wf.write(AssignParity(f'{op}{immVal}') + '\n')
